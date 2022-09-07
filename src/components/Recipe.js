@@ -1,13 +1,15 @@
+import Collapse from '@mui/material/Collapse';
 import React, { useState, useContext } from 'react';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ListItemButton from '@mui/material/ListItemButton';
-import { RecipesContext } from '../context/RecipesContext';
 import DinnerDiningOutlinedIcon from '@mui/icons-material/DinnerDiningOutlined';
 import Ingredients from './Ingredients';
 import EditableItem from './EditableItem';
 import EditDeleteBar from './EditDeleteBar';
+import RecipeDescription from './RecipeDescription';
+import { RecipesContext } from '../context/RecipesContext';
 
 function Recipe(props) {
   const { recipeId, name, description, ingredients } = props;
@@ -42,7 +44,7 @@ function Recipe(props) {
     setRecipes(newRecipies);
   };
 
-  const onEdit = (newName) => {
+  const onEdit = newName => {
     const newRecipes = recipes.map(recipe => {
       if (recipe.id === recipeId) {
         return {
@@ -84,10 +86,19 @@ function Recipe(props) {
           :
           <ExpandMore onClick={handleExpandClick} />
         }
-
       </ListItemButton>
 
-      <Ingredients recipeId={recipeId} open={open} ingredients={ingredients}></Ingredients>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <RecipeDescription
+          recipeId={recipeId}
+          description={description}>
+        </RecipeDescription>
+
+        <Ingredients
+          recipeId={recipeId}
+          ingredients={ingredients}>
+        </Ingredients>
+      </Collapse>
     </div>
   );
 }

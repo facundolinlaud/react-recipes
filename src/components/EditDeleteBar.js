@@ -12,9 +12,11 @@ function EditDeleteBar(props) {
       <IconButton aria-label="edit" onClick={toggleEditing}>
         <EditOutlinedIcon />
       </IconButton>
-      <IconButton aria-label="delete" onClick={handleRemove}>
-        <DeleteIcon />
-      </IconButton>
+      {handleRemove && (
+        <IconButton aria-label="delete" onClick={handleRemove}>
+          <DeleteIcon />
+        </IconButton>
+      )}
     </ListItemIcon>
     );
 }
