@@ -9,15 +9,22 @@ import Ingredients from './Ingredients';
 import EditableItem from './EditableItem';
 import EditDeleteBar from './EditDeleteBar';
 import RecipeDescription from './RecipeDescription';
-import { RecipesContext } from '../context/RecipesContext';
+import { DispatchContext } from '../context/RecipesContext';
+import * as events from '../events/recipes';
 
 function Recipe(props) {
-  const { recipeId, name, description, ingredients } = props;
+  const {
+    name,
+    recipeId,
+    description,
+    ingredients,
+  } = props;
 
   const [open, setOpen] = useState(true);
   const [isEditing, setEditing] = useState(false);
   const [isMouseOver, setMouseOver] = useState(false);
-  const [recipes, setRecipes] = useContext(RecipesContext);
+
+  const dispatch = useContext(DispatchContext);
 
   const toggleEditing = (e) => {
     setEditing(!isEditing);
@@ -25,10 +32,6 @@ function Recipe(props) {
 
   const handleExpandClick = () => {
     setOpen(!open);
-  };
-
-  const handleRemoveClick = (e) => {
-    e.stopPropagation();
   };
 
   const handleMouseOver = () => {
@@ -39,24 +42,19 @@ function Recipe(props) {
     setMouseOver(false);
   };
 
-  const handleRemove = () => {
-    const newRecipies = recipes.filter(recipe => recipe.id !== recipeId);
-    setRecipes(newRecipies);
+  const handleEdit = newName => {
+    dispatch({
+      type: events.EDIT_RECIPE,
+      recipeId,
+      newName,
+    });
   };
 
-  const onEdit = newName => {
-    const newRecipes = recipes.map(recipe => {
-      if (recipe.id === recipeId) {
-        return {
-          ...recipe,
-          name: newName,
-        };
-      }
-
-      return recipe;
+  const handleRemove = () => {
+    dispatch({
+      type: events.REMOVE_RECIPE,
+      recipeId,
     });
-
-    setRecipes(newRecipes);
   };
 
   return (
@@ -71,12 +69,11 @@ function Recipe(props) {
           name={name}
           isEditing={isEditing}
           toggleEditing={toggleEditing}
-          onEdit={onEdit}>
+          handleEdit={handleEdit}>
         </EditableItem>
 
         <EditDeleteBar
           isVisible={isMouseOver}
-          onRemove={handleRemoveClick}
           toggleEditing={toggleEditing}
           handleRemove={handleRemove}>
         </EditDeleteBar>
@@ -88,7 +85,7 @@ function Recipe(props) {
         }
       </ListItemButton>
 
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <Collapse in={open} timeout='auto' unmountOnExit>
         <RecipeDescription
           recipeId={recipeId}
           description={description}>

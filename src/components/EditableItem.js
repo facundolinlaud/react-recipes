@@ -4,12 +4,12 @@ import ListItemText from '@mui/material/ListItemText';
 import useInputState from '../hooks/useInputState';
 
 function EditableItem(props) {
-  const { name, isEditing, toggleEditing, onEdit } = props;
+  const { name, isEditing, toggleEditing, handleEdit } = props;
   const [value, handleChange] = useInputState(name);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onEdit(value);
+    handleEdit(value);
     toggleEditing();
   };
 
