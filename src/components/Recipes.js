@@ -2,19 +2,119 @@ import { v4 as uuid } from 'uuid';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
-import React, { useContext } from 'react';
-import Recipe from './Recipe';
+import React, { useEffect, useState } from 'react';
+import * as recipesClient from '../api/recipes';
 import AddRecipe from './AddRecipe';
-import { RecipesContext } from '../context/RecipesContext';
+import Recipe from './Recipe';
 
 function Recipes() {
-  const recipes = useContext(RecipesContext);
+  const [recipes, setRecipes] = useState([]);
+
+  const fetchRecipes = () => {
+    recipesClient
+      .getRecipes()
+      .then(setRecipes);
+  };
+
+  useEffect(fetchRecipes, []);
+
+  const addRecipe = ({ name, description, ingredients = [] }) => {
+    recipesClient
+      .addRecipe({ name, description, ingredients })
+      .then((newRecipe) => {
+        setRecipes([...recipes, newRecipe]);
+      });
+  };
+
+  const editRecipe = ({ recipeId, name }) => {
+    recipesClient
+      .editRecipe({ recipeId, name })
+      .then(fetchRecipes);
+  };
+
+  const removeRecipe = ({ recipeId }) => {
+    recipesClient
+      .removeRecipe({ recipeId })
+      .then(fetchRecipes);
+  }
+
+  const removeIngredient = ({ recipeId, ingredientId }) => {
+    const recipe = recipes.find(r => r.id === recipeId);
+    const newIngredients = recipe.ingredients.filter(i => i.id !== ingredientId);
+
+    recipesClient
+      .editRecipe({
+        recipeId,
+        ingredients: newIngredients,
+      })
+      .then(fetchRecipes);
+  };
+
+  const editIngredient = ({ recipeId, ingredientId, name }) => {
+    const recipe = recipes.find(r => r.id === recipeId);
+
+    const ingredients = recipe.ingredients.map(ingredient => {
+      if (ingredient.id === ingredientId) {
+        return {
+          name,
+        };
+      }
+
+      return ingredient;
+    });
+
+    recipesClient
+      .editRecipe({
+        recipeId,
+        ingredients,
+      })
+      .then(fetchRecipes);
+
+    const newRecipies = recipes.map(recipe => {
+      if (recipe.id === recipeId) {
+        const newIngredients = recipe.ingredients.map(ingredient => {
+          if (ingredient.id === ingredientId) {
+            return {
+              ...ingredient,
+              name,
+            }
+          }
+
+          return ingredient;
+        });
+
+        return {
+          ...recipe,
+          ingredients: newIngredients,
+        };
+      }
+
+      return recipe;
+    });
+
+    setRecipes(newRecipies);
+  };
+
+  const editRecipeDescription = ({ recipeId, newDescription }) => {
+    const newRecipes = recipes.map(recipe => {
+      if (recipe.id === recipeId) {
+        return {
+          ...recipe,
+          description: newDescription,
+        };
+      }
+
+      return recipe;
+    });
+
+    setRecipes(newRecipes);
+  };
 
   return (
     <>
       <Typography variant='h4' component='h1' gutterBottom>Recipes</Typography>
 
-      <AddRecipe></AddRecipe>
+      <AddRecipe addRecipe={addRecipe}></AddRecipe>
 
       <Divider />
 
@@ -24,11 +124,18 @@ function Recipes() {
         component='nav'>
 
         {recipes.map(recipe => (
-          <Recipe key={uuid()}
-            recipeId={recipe.id}
+          <Recipe
+            key={uuid()}
             name={recipe.name}
+            recipeId={recipe.id}
             description={recipe.description}
-            ingredients={recipe.ingredients}>
+            ingredients={recipe.ingredients}
+            editRecipe={editRecipe}
+            removeRecipe={removeRecipe}
+            editIngredient={editIngredient}
+            removeIngredient={removeIngredient}
+            editRecipeDescription={editRecipeDescription}
+          >
           </Recipe>
         ))}
       </List>

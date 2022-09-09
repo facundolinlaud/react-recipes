@@ -4,16 +4,18 @@ import List from '@mui/material/List';
 import Ingredient from './Ingredient';
 
 function Ingredients(props) {
-  const { recipeId, ingredients } = props;
+  const { recipeId, ingredients, editIngredient, removeIngredient } = props;
 
   return (
     <List component='div' disablePadding>
       {ingredients.map(ingredient => (
         <Ingredient
+          key={uuid()}
           recipeId={recipeId}
-          ingredientId={ingredient.id}
           name={ingredient.name}
-          key={uuid()}>
+          ingredientId={ingredient.id}
+          editIngredient={editIngredient}
+          removeIngredient={removeIngredient}>
         </Ingredient>
       ))}
     </List>

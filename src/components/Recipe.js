@@ -1,5 +1,5 @@
 import Collapse from '@mui/material/Collapse';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
@@ -9,8 +9,6 @@ import Ingredients from './Ingredients';
 import EditableItem from './EditableItem';
 import EditDeleteBar from './EditDeleteBar';
 import RecipeDescription from './RecipeDescription';
-import { DispatchContext } from '../context/RecipesContext';
-import * as events from '../events/recipes';
 
 function Recipe(props) {
   const {
@@ -18,13 +16,16 @@ function Recipe(props) {
     recipeId,
     description,
     ingredients,
+    editRecipe,
+    removeRecipe,
+    editIngredient,
+    removeIngredient,
+    editRecipeDescription,
   } = props;
 
   const [open, setOpen] = useState(true);
   const [isEditing, setEditing] = useState(false);
   const [isMouseOver, setMouseOver] = useState(false);
-
-  const dispatch = useContext(DispatchContext);
 
   const toggleEditing = (e) => {
     setEditing(!isEditing);
@@ -42,19 +43,12 @@ function Recipe(props) {
     setMouseOver(false);
   };
 
-  const handleEdit = newName => {
-    dispatch({
-      type: events.EDIT_RECIPE,
-      recipeId,
-      newName,
-    });
+  const handleEdit = name => {
+    editRecipe({ recipeId, name });
   };
 
   const handleRemove = () => {
-    dispatch({
-      type: events.REMOVE_RECIPE,
-      recipeId,
-    });
+    removeRecipe({ recipeId });
   };
 
   return (
@@ -88,12 +82,15 @@ function Recipe(props) {
       <Collapse in={open} timeout='auto' unmountOnExit>
         <RecipeDescription
           recipeId={recipeId}
-          description={description}>
+          description={description}
+          editRecipeDescription={editRecipeDescription}>
         </RecipeDescription>
 
         <Ingredients
           recipeId={recipeId}
-          ingredients={ingredients}>
+          ingredients={ingredients}
+          editIngredient={editIngredient}
+          removeIngredient={removeIngredient}>
         </Ingredients>
       </Collapse>
     </div>

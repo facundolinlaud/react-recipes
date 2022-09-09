@@ -1,18 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
-import { DispatchContext } from '../context/RecipesContext';
 import useInputState from '../hooks/useInputState';
-import * as events from '../events/recipes';
 
-function AddRecipe() {
+function AddRecipe(props) {
+  const { addRecipe } = props;
   const [name, setName] = useInputState('');
   const [description, setDescription] = useInputState('');
   const [ingredients, setIngredients] = useInputState('');
-  const dispatch = useContext(DispatchContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,8 +22,7 @@ function AddRecipe() {
       .split(',')
       .map(ing => ing.trim());
 
-    dispatch({
-      type: events.ADD_RECIPE,
+    addRecipe({
       name,
       description,
       ingredients: parsedIngredients,

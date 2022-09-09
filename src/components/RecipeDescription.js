@@ -1,18 +1,15 @@
 import { v4 as uuid } from 'uuid';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import EditDeleteBar from './EditDeleteBar';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemButton from '@mui/material/ListItemButton';
-import { DispatchContext } from '../context/RecipesContext';
 import DescriptionIcon from '@mui/icons-material/Description';
-import * as events from '../events/recipes';
 import EditableItem from './EditableItem';
 
 function RecipeDescription(props) {
-  const { recipeId, description } = props;
+  const { recipeId, description, editRecipeDescription } = props;
   const [isEditing, setEditing] = useState(false);
   const [isMouseOver, setMouseOver] = useState(false);
-  const dispatch = useContext(DispatchContext);
 
   const toggleEditing = () => {
     setEditing(!isEditing);
@@ -27,10 +24,9 @@ function RecipeDescription(props) {
   };
 
   const handleEdit = newDescription => {
-    dispatch({
+    editRecipeDescription({
       recipeId,
       newDescription,
-      type: events.EDIT_RECIPE_DESCRIPTION,
     });
   };
 

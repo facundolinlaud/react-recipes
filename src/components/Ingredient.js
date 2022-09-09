@@ -1,18 +1,15 @@
 import { v4 as uuid } from 'uuid';
 import EditDeleteBar from './EditDeleteBar';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemButton from '@mui/material/ListItemButton';
 import EggOutlinedIcon from '@mui/icons-material/EggOutlined';
-import { DispatchContext } from '../context/RecipesContext';
-import * as events from '../events/recipes';
 import EditableItem from './EditableItem';
 
 function Ingredient(props) {
-  const { ingredientId, recipeId, name } = props;
+  const { ingredientId, recipeId, name, editIngredient, removeIngredient } = props;
   const [isEditing, setEditing] = useState(false);
   const [isMouseOver, setMouseOver] = useState(false);
-  const dispatch = useContext(DispatchContext);
 
   const toggleEditing = () => {
     setEditing(!isEditing);
@@ -26,20 +23,18 @@ function Ingredient(props) {
     setMouseOver(false);
   };
 
-  const handleEdit = newName => {
-    dispatch({
-      newName,
+  const handleEdit = name => {
+    editIngredient({
+      name,
       recipeId,
       ingredientId,
-      type: events.EDIT_INGREDIENT,
     });
   };
 
   const handleRemove = () => {
-    dispatch({
+    removeIngredient({
       recipeId,
       ingredientId,
-      type: events.REMOVE_RECIPE,
     });
   };
 
