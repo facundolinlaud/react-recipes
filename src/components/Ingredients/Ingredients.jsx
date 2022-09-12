@@ -1,6 +1,6 @@
 import React from 'react';
 import List from '@mui/material/List';
-import Ingredient from './Ingredient';
+import Ingredient from '../Ingredient';
 
 function Ingredients(props) {
   const { recipeId, ingredients, editIngredient, removeIngredient } = props;

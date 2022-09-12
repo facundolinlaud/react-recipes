@@ -5,10 +5,10 @@ import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import ListItemButton from '@mui/material/ListItemButton';
 import DinnerDiningOutlinedIcon from '@mui/icons-material/DinnerDiningOutlined';
-import Ingredients from './Ingredients';
-import EditableItem from './EditableItem';
-import EditDeleteBar from './EditDeleteBar';
-import RecipeDescription from './RecipeDescription';
+import Ingredients from '../Ingredients';
+import EditableItem from '../EditableItem';
+import EditDeleteBar from '../EditDeleteBar';
+import RecipeDescription from '../RecipeDescription';
 
 function Recipe(props) {
   const {

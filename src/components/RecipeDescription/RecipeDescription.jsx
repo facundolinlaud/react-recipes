@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import EditDeleteBar from './EditDeleteBar';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemButton from '@mui/material/ListItemButton';
 import DescriptionIcon from '@mui/icons-material/Description';
-import EditableItem from './EditableItem';
+import EditDeleteBar from '../EditDeleteBar';
+import EditableItem from '../EditableItem';
 
 function RecipeDescription(props) {
   const { recipeId, description, editRecipeDescription } = props;

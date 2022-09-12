@@ -2,9 +2,9 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
 import React, { useEffect, useState } from 'react';
-import * as recipesClient from '../api/recipes';
-import AddRecipe from './AddRecipe';
-import Recipe from './Recipe';
+import * as recipesClient from '../../api/recipes';
+import AddRecipe from '../AddRecipe';
+import Recipe from '../Recipe';
 
 function Recipes() {
   const [recipes, setRecipes] = useState([]);

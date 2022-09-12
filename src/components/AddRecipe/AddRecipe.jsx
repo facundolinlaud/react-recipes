@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
-import useInputState from '../hooks/useInputState';
+import useInputState from '../../hooks/useInputState';
 
 function AddRecipe(props) {
   const { addRecipe } = props;

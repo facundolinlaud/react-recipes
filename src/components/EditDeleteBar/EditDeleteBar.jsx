@@ -9,11 +9,11 @@ function EditDeleteBar(props) {
 
   return isVisible &&
     (<ListItemIcon>
-      <IconButton aria-label='edit' onClick={toggleEditing}>
+      <IconButton role='button' aria-label='edit' onClick={toggleEditing}>
         <EditOutlinedIcon />
       </IconButton>
       {handleRemove && (
-        <IconButton aria-label='delete' onClick={handleRemove}>
+        <IconButton role='button' aria-label='delete' onClick={handleRemove}>
           <DeleteIcon />
         </IconButton>
       )}

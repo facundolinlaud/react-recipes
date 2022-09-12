@@ -1,9 +1,9 @@
-import EditDeleteBar from './EditDeleteBar';
 import React, { useState } from 'react';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemButton from '@mui/material/ListItemButton';
 import EggOutlinedIcon from '@mui/icons-material/EggOutlined';
-import EditableItem from './EditableItem';
+import EditDeleteBar from '../EditDeleteBar';
+import EditableItem from '../EditableItem';
 
 function Ingredient(props) {
   const { ingredientId, recipeId, name, editIngredient, removeIngredient } = props;

@@ -1,7 +1,7 @@
 import React from 'react';
 import TextField from '@mui/material/TextField';
 import ListItemText from '@mui/material/ListItemText';
-import useInputState from '../hooks/useInputState';
+import useInputState from '../../hooks/useInputState';
 
 function EditableItem(props) {
   const { name, isEditing, toggleEditing, handleEdit } = props;
