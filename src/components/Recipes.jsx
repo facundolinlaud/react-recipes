@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import Typography from '@mui/material/Typography';
@@ -95,7 +94,7 @@ function Recipes() {
 
         {recipes.map(recipe => (
           <Recipe
-            key={uuid()}
+            key={`recipes-${recipe.id}`}
             name={recipe.name}
             recipeId={recipe.id}
             description={recipe.description}

@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import React, { useState } from 'react';
 import EditDeleteBar from './EditDeleteBar';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -34,7 +33,7 @@ function RecipeDescription(props) {
     <ListItemButton
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
-      sx={{ pl: 4 }} key={uuid()}>
+      sx={{ pl: 4 }} key={`recipe-description-${recipeId}`}>
 
       <ListItemIcon>
         <DescriptionIcon />

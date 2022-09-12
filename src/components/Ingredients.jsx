@@ -1,5 +1,4 @@
 import React from 'react';
-import { v4 as uuid } from 'uuid';
 import List from '@mui/material/List';
 import Ingredient from './Ingredient';
 
@@ -10,7 +9,7 @@ function Ingredients(props) {
     <List component='div' disablePadding>
       {ingredients.map(ingredient => (
         <Ingredient
-          key={uuid()}
+          key={`ingredients-${ingredient.id}`}
           recipeId={recipeId}
           name={ingredient.name}
           ingredientId={ingredient.id}

@@ -1,4 +1,3 @@
-import { v4 as uuid } from 'uuid';
 import EditDeleteBar from './EditDeleteBar';
 import React, { useState } from 'react';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -42,7 +41,7 @@ function Ingredient(props) {
     <ListItemButton
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
-      sx={{ pl: 4 }} key={uuid()}>
+      sx={{ pl: 4 }} key={`ingredient-${ingredientId}`}>
 
       <ListItemIcon>
         <EggOutlinedIcon />
