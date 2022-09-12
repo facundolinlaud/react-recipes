@@ -69,45 +69,15 @@ function Recipes() {
         ingredients,
       })
       .then(fetchRecipes);
-
-    const newRecipies = recipes.map(recipe => {
-      if (recipe.id === recipeId) {
-        const newIngredients = recipe.ingredients.map(ingredient => {
-          if (ingredient.id === ingredientId) {
-            return {
-              ...ingredient,
-              name,
-            }
-          }
-
-          return ingredient;
-        });
-
-        return {
-          ...recipe,
-          ingredients: newIngredients,
-        };
-      }
-
-      return recipe;
-    });
-
-    setRecipes(newRecipies);
   };
 
   const editRecipeDescription = ({ recipeId, newDescription }) => {
-    const newRecipes = recipes.map(recipe => {
-      if (recipe.id === recipeId) {
-        return {
-          ...recipe,
-          description: newDescription,
-        };
-      }
-
-      return recipe;
-    });
-
-    setRecipes(newRecipes);
+    recipesClient
+      .editRecipe({
+        recipeId,
+        description: newDescription,
+      })
+      .then(fetchRecipes);
   };
 
   return (
