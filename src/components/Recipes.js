@@ -114,7 +114,7 @@ function Recipes() {
     <>
       <Typography variant='h4' component='h1' gutterBottom>Recipes</Typography>
 
-      <AddRecipe addRecipe={addRecipe}></AddRecipe>
+      <AddRecipe addRecipe={addRecipe} />
 
       <Divider />
 
@@ -135,8 +135,7 @@ function Recipes() {
             editIngredient={editIngredient}
             removeIngredient={removeIngredient}
             editRecipeDescription={editRecipeDescription}
-          >
-          </Recipe>
+          />
         ))}
       </List>
     </ >

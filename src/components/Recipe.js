@@ -83,15 +83,15 @@ function Recipe(props) {
         <RecipeDescription
           recipeId={recipeId}
           description={description}
-          editRecipeDescription={editRecipeDescription}>
-        </RecipeDescription>
+          editRecipeDescription={editRecipeDescription}
+        />
 
         <Ingredients
           recipeId={recipeId}
           ingredients={ingredients}
           editIngredient={editIngredient}
-          removeIngredient={removeIngredient}>
-        </Ingredients>
+          removeIngredient={removeIngredient}
+        />
       </Collapse>
     </div>
   );

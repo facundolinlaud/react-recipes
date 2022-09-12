@@ -15,8 +15,8 @@ function Ingredients(props) {
           name={ingredient.name}
           ingredientId={ingredient.id}
           editIngredient={editIngredient}
-          removeIngredient={removeIngredient}>
-        </Ingredient>
+          removeIngredient={removeIngredient}
+        />
       ))}
     </List>
   );

@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   return (
     <Container>
-      <Recipes></Recipes>
+      <Recipes />
     </Container>
   );
 }

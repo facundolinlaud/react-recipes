@@ -52,14 +52,14 @@ function Ingredient(props) {
         name={name}
         isEditing={isEditing}
         toggleEditing={toggleEditing}
-        handleEdit={handleEdit}>
-      </EditableItem>
+        handleEdit={handleEdit}
+      />
 
       <EditDeleteBar
         isVisible={isMouseOver}
         handleRemove={handleRemove}
-        toggleEditing={toggleEditing}>
-      </EditDeleteBar>
+        toggleEditing={toggleEditing}
+      />
     </ListItemButton>
   );
 }

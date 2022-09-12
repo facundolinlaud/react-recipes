@@ -49,8 +49,8 @@ function RecipeDescription(props) {
 
       <EditDeleteBar
         isVisible={isMouseOver}
-        toggleEditing={toggleEditing}>
-      </EditDeleteBar>
+        toggleEditing={toggleEditing}
+      />
     </ListItemButton>
   );
 }
