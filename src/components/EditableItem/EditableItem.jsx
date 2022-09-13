@@ -19,13 +19,15 @@ function EditableItem(props) {
         <form onSubmit={handleSubmit}>
           <TextField
             onChange={handleChange}
+            aria-label='edit'
+            role='textbox'
             value={value}
             fullWidth
             autoFocus
-          ></TextField>
+          />
         </form >
         :
-        <ListItemText primary={value} />
+        <ListItemText role='listitem' primary={value} />
       }
     </>
   );

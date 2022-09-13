@@ -38,7 +38,12 @@ function AddRecipe(props) {
           </Grid>
 
           <Grid item>
-            <TextField defaultValue={name} onChange={setName}></TextField>
+            <TextField
+              aria-label='name'
+              role='textbox'
+              defaultValue={name}
+              onChange={setName}
+            />
           </Grid>
 
           <Grid item>
@@ -46,7 +51,12 @@ function AddRecipe(props) {
           </Grid>
 
           <Grid item>
-            <TextField defaultValue={description} onChange={setDescription}></TextField>
+            <TextField
+              aria-label='descriptions'
+              role='textbox'
+              defaultValue={description}
+              onChange={setDescription}
+            />
           </Grid>
 
           <Grid item>
@@ -54,7 +64,12 @@ function AddRecipe(props) {
           </Grid>
 
           <Grid item>
-            <TextField defaultValue={ingredients} onChange={setIngredients}></TextField>
+            <TextField
+              aria-label='ingredients'
+              role='textbox'
+              defaultValue={ingredients}
+              onChange={setIngredients}
+            />
           </Grid>
 
           <Grid item>
