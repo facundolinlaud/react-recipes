@@ -46,7 +46,7 @@ describe('<Ingredients/>', () => {
     const remove = getByRole('button', { name: /edit/i });
     fireEvent.click(remove);
 
-    expect(ingredient).not.toBeVisible();
+    expect(ingredient).not.toBeInTheDocument();
   });
 
   it('should edit the ingredient name when modified with the EditDeleteBar', () => {

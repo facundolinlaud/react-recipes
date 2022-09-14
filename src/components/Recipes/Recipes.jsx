@@ -20,9 +20,7 @@ function Recipes() {
   const addRecipe = ({ name, description, ingredients = [] }) => {
     recipesClient
       .addRecipe({ name, description, ingredients })
-      .then((newRecipe) => {
-        setRecipes([...recipes, newRecipe]);
-      });
+      .then(fetchRecipes);
   };
 
   const editRecipe = ({ recipeId, name }) => {
